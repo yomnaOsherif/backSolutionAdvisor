@@ -1,0 +1,25 @@
+{
+  "name": "express-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.16.4",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.21"
+  },
+  "devDependencies": {
+    "jest": "^24.7.1",
+    "nodemon": "^1.18.10"
+  }
+}
