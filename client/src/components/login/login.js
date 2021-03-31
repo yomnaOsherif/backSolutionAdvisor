@@ -1,7 +1,6 @@
 import React from "react";
-// import SearchIcon from '@material-ui/icons/Search';
-// import { useHistory } from "react-router-dom";
-// import links from '../../../App.constant';
+import { useHistory } from "react-router-dom";
+import links from "../../App.constant";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "react-bootstrap";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
@@ -18,12 +17,15 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import "./login.css";
 
 function LoginPage() {
-  // const history = useHistory();
-  // const onBackHome = () => {
-  // 	history.push(links.HOME);
-  // };
+  const history = useHistory();
+  const onRegisterClient = () => {
+    history.push(links.REGISTERCLIENT);
+  };
+  const onRegisterArchitect = () => {
+    history.push(links.REGISTERARCHITECT);
+  };
   // const onclickAbout = () => {
-  // 	window.location.href = 'https://fujairah.ae/en/pages/about.aspx';
+  //  window.location.href = 'https://fujairah.ae/en/pages/about.aspx';
   // };
 
   const [values, setValues] = React.useState({
@@ -62,7 +64,10 @@ function LoginPage() {
               </p>
             </div>
             <ul className="fullclick">
-              <li className="register-start-listitem">
+              <li
+                className="register-start-listitem"
+                onClick={onRegisterClient}
+              >
                 <div className="icon-container">
                   <img src={Icon1} width="60" alt="icon" />
                 </div>
@@ -80,7 +85,10 @@ function LoginPage() {
                 </div>
               </li>
 
-              <li className="register-start-listitem">
+              <li
+                className="register-start-listitem"
+                onClick={onRegisterArchitect}
+              >
                 <div className="icon-container">
                   <img src={Icon2} width="60" alt="icon" />
                 </div>
@@ -115,14 +123,14 @@ function LoginPage() {
             </div>
 
             <TextField
-              className="username-field"
+              className="login-username-field"
               id="username"
               label="Username"
               type="username"
               variant="outlined"
             />
 
-            <FormControl className="pass-textfield" variant="outlined">
+            <FormControl className="login-pass-textfield" variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Password
               </InputLabel>
@@ -149,7 +157,7 @@ function LoginPage() {
 
             <div className="btn-container">
               <Button className="btn" type="submit" label="Login">
-                Login
+                LOGIN
               </Button>
             </div>
           </form>
