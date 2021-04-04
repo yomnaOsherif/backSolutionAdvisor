@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import links from './App.constant';
 import LoginPage from './components/login/login';
+import LandingPage from './components/landing/landing';
+
 // import HomePage from './components/home/home';
 import './App.css';
 
@@ -15,6 +17,8 @@ function App() {
       <Router>
 					<Switch>
 						<Route path={links.LOGIN} component={LoginPage} />
+						<Route path={links.LANDING} component={LandingPage} />
+
 					{/* <Route exact path={links.HOME} component={HomePage} /> */}
 					</Switch>
 				</Router>
