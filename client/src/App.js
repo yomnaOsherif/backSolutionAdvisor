@@ -9,6 +9,9 @@ import RegisterClientPage from "./components/register-client/register-client";
 import RegisterArchitectPage from "./components/register-architect/register-architect";
 import HeaderPage from "./components/header/header";
 import LandingPage from './components/landing/landing';
+import AboutUsPage from './components/aboutus/aboutus';
+import SuccessStoriesPage from './components/successstories/successstories';
+
 import "./App.css";
 
 function App() {
@@ -19,6 +22,9 @@ function App() {
           <Switch>
             <Route path={links.LOGIN} component={LoginPage} />
             <Route path={links.LANDING} component={LandingPage} />
+            <Route path={links.ABOUTUS} component={AboutUsPage} />
+            <Route path={links.SUCCESSSTORIES} component={SuccessStoriesPage} />
+
             <Route
               exact
               path={links.REGISTERCLIENT}

@@ -1,0 +1,156 @@
+.title{
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 36px;
+line-height: 44px;
+display: flex;
+align-items: center;
+color: #000000;
+position: absolute;
+width: 272px;
+height: 44px;
+left: 411px;
+top: 101px;
+}
+
+.filter{
+position: absolute;
+width: 223px;
+height: 22px;
+left: 733px;
+top: 115px;
+
+font-family: Inter;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 22px;
+display: flex;
+align-items: center;
+color: #777373;
+}
+
+.container{
+    /* Auto Layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+
+position: static;
+width: 1065px;
+height: 289px;
+left: calc(50% - 1065px/2);
+top: 100px;
+
+
+/* Inside Auto Layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 24px 0px;
+}
+.col-lg-4{
+ column-gap: 50px;
+
+
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    column-gap: 100px;
+    position: absolute;
+    width: 1065px;
+    height: 271px;
+    left: 345px;
+    top: 550px;
+    }
+
+.row1{
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+column-gap: 50px;
+position: absolute;
+width: 1065px;
+height: 271px;
+left: 328px;
+top: 200px;
+}
+
+.card-item{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 35px 40px;
+
+position: static;
+width: 328px;
+height: 245px;
+left: 0px;
+top: 0px;
+
+background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+/* Inside Auto Layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 0px 0px;}
+
+
+.card-title{
+/* h5 */
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: 0.1px;
+color: #252B42;
+}
+
+.paragraph{
+position: static;
+width: 275px;
+height: 40px;
+left: 40px;
+top: 133px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0.2px;
+color: #737373;
+flex: none;
+order: 2;
+flex-grow: 0;
+margin: 15px 0px;
+
+}
+
+.read-more{
+font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 11px;
+line-height: 20px;
+/* identical to box height, or 182% */
+text-align: right;
+letter-spacing: 0.2px;
+
+color: #3177DD;
+
+
+/* Inside Auto Layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+margin: 15px 0px;
+}

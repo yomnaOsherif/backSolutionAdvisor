@@ -1,0 +1,63 @@
+.logo{
+position: absolute;
+width: 51px;
+height: 21px;
+left: 1360px;
+top: 38px;
+
+background:  url("../../assets/logo.png");
+}
+.title{
+    position: absolute;
+width: 153px;
+height: 44px;
+left: 460px;
+top: 98px;
+
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 36px;
+line-height: 44px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #000000;
+}
+.who-are-we{
+    position: absolute;
+width: 322px;
+height: 28px;
+left: 460px;
+top: 219px;
+
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 23px;
+line-height: 28px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #000000;
+}
+
+.paragraph{
+    position: absolute;
+width: 885px;
+height: 44px;
+left: 460px;
+top: 264px;
+
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 22px;
+display: flex;
+align-items: center;
+
+color: #778192;
+}

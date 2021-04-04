@@ -5,6 +5,9 @@ const links = {
   REGISTERARCHITECT: "/register-architect",
   HEADER: "/header",
   LANDING: '/landing',
+  ABOUTUS: '/about-us',
+  SUCCESSSTORIES: '/success-stories'
+
 
 };
 
