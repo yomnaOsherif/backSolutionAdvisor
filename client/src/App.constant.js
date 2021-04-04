@@ -3,6 +3,7 @@ const links = {
   HOME: "/",
   REGISTERCLIENT: "/register-client",
   REGISTERARCHITECT: "/register-architect",
+  HEADER: "/header",
   LANDING: '/landing',
 
 };

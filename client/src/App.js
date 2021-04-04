@@ -7,6 +7,7 @@ import links from "./App.constant";
 import LoginPage from "./components/login/login";
 import RegisterClientPage from "./components/register-client/register-client";
 import RegisterArchitectPage from "./components/register-architect/register-architect";
+import HeaderPage from "./components/header/header";
 import LandingPage from './components/landing/landing';
 import "./App.css";
 
@@ -27,6 +28,12 @@ function App() {
               exact
               path={links.REGISTERARCHITECT}
               component={RegisterArchitectPage}
+            />
+
+            <Route
+              exact
+              path={links.HEADER}
+              component={HeaderPage}
             />
           </Switch>
         </Router>
