@@ -8,6 +8,7 @@ import LoginPage from "./components/login/login";
 import RegisterClientPage from "./components/register-client/register-client";
 import RegisterArchitectPage from "./components/register-architect/register-architect";
 import HeaderPage from "./components/header/header";
+import LandingPage from './components/landing/landing';
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Router>
           <Switch>
             <Route path={links.LOGIN} component={LoginPage} />
+            <Route path={links.LANDING} component={LandingPage} />
             <Route
               exact
               path={links.REGISTERCLIENT}
