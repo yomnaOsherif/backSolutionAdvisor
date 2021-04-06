@@ -14,40 +14,40 @@ function LandingPage() {
 <div>
 
       <div>
-      <div className="logo" >
+      <div className="landing-logo" >
             <img src={LOGO} width="110" alt="ibm"/>
       </div> 
-      <div className="col-md-8">
-          <div className="h1">
+      <div className="col-md-8 landing-left">
+          <div className="landing-main-title">
           IBM Solution Advisor
           </div>
-          <div className="h4">
+          <div className="landing-sub-title">
           we know how large objects will act but things on a small scale
           </div>
           </div>
-          <Button className="btn" type="submit" label="Get Started">
-          <p className = "btn-text">Get Started </p>        
+          <Button className="landing-btn" type="submit" label="Get Started">
+          <p className = "landing-btn-text">Get Started </p>        
              </Button>  
             
           
       </div> 
-      <div className="row">
+      <div className="row landing-main">
       <Card className="card-item">
           <img src={Alien} alt="alien"/>
-          <div className="h3">Artificial Intelligence</div>
-          <div className="paragraph">the quick fox jumps over the lazy dog</div>
+          <div className="card-item-maintxt">Artificial Intelligence</div>
+          <div className="card-item-paragraph">the quick fox jumps over the lazy dog</div>
           </Card>
       
       <Card className="card-item">
       <img src={NLP} alt="nlp"/>
-          <div className="h3">Natural Language Processing</div>
-          <div className="paragraph">the quick fox jumps over the lazy dog</div>
+          <div className="card-item-maintxt">Natural Language Processing</div>
+          <div className="card-item-paragraph">the quick fox jumps over the lazy dog</div>
           </Card>
 
       <Card className="card-item">
       <img src={NLU} alt="nlu" width="35px" height="29px"/>
-          <div className="h3">Natural Language Understanding</div>
-          <div className="paragraph">the quick fox jumps over the lazy dog</div>
+          <div className="card-item-maintxt">Natural Language Understanding</div>
+          <div className="card-item-paragraph">the quick fox jumps over the lazy dog</div>
           </Card>
       </div>
       <div className="ai-pic">
