@@ -18,7 +18,6 @@ function App() {
         <Router>
           <Switch>
             <Route path={links.LOGIN} component={LoginPage} />
-            <Route path={links.LANDING} component={LandingPage} />
             <Route
               exact
               path={links.REGISTERCLIENT}
@@ -35,6 +34,8 @@ function App() {
               path={links.HEADER}
               component={HeaderPage}
             />
+                        <Route path={links.LANDING} component={LandingPage} />
+
           </Switch>
         </Router>
         <ToastContainer
