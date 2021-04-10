@@ -10,6 +10,8 @@ import RegisterArchitectPage from "./components/register-architect/register-arch
 import HeaderPage from "./components/header/header";
 import LandingPage from './components/landing/landing';
 import AboutUsPage from './components/aboutus/aboutus';
+import SuccessStoriesPage from './components/success-stories/success-stories';
+
 import "./App.css";
 
 function App() {
@@ -34,6 +36,12 @@ function App() {
               exact
               path={links.ABOUTUS}
               component={AboutUsPage}
+            />
+
+            <Route
+              exact
+              path={links.SUCCESSSTORIES}
+              component={SuccessStoriesPage}
             />
 
             <Route
