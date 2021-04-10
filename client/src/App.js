@@ -9,6 +9,7 @@ import RegisterClientPage from "./components/register-client/register-client";
 import RegisterArchitectPage from "./components/register-architect/register-architect";
 import HeaderPage from "./components/header/header";
 import LandingPage from './components/landing/landing';
+import AboutUsPage from './components/aboutus/aboutus';
 import "./App.css";
 
 function App() {
@@ -27,6 +28,12 @@ function App() {
               exact
               path={links.REGISTERARCHITECT}
               component={RegisterArchitectPage}
+            />
+
+<Route
+              exact
+              path={links.ABOUTUS}
+              component={AboutUsPage}
             />
 
             <Route
