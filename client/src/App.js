@@ -9,6 +9,9 @@ import RegisterClientPage from "./components/register-client/register-client";
 import RegisterArchitectPage from "./components/register-architect/register-architect";
 import HeaderPage from "./components/header/header";
 import LandingPage from './components/landing/landing';
+import AboutUsPage from './components/aboutus/aboutus';
+import SuccessStoriesPage from './components/success-stories/success-stories';
+
 import "./App.css";
 
 function App() {
@@ -18,7 +21,6 @@ function App() {
         <Router>
           <Switch>
             <Route path={links.LOGIN} component={LoginPage} />
-            <Route path={links.LANDING} component={LandingPage} />
             <Route
               exact
               path={links.REGISTERCLIENT}
@@ -30,11 +32,25 @@ function App() {
               component={RegisterArchitectPage}
             />
 
+<Route
+              exact
+              path={links.ABOUTUS}
+              component={AboutUsPage}
+            />
+
+            <Route
+              exact
+              path={links.SUCCESSSTORIES}
+              component={SuccessStoriesPage}
+            />
+
             <Route
               exact
               path={links.HEADER}
               component={HeaderPage}
             />
+                        <Route path={links.LANDING} component={LandingPage} />
+
           </Switch>
         </Router>
         <ToastContainer
