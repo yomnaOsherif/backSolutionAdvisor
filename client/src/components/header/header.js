@@ -1,6 +1,6 @@
 import React from "react";
-// import { useHistory } from "react-router-dom";
-// import links from "../../App.constant";
+import { useHistory } from "react-router-dom";
+import links from "../../App.constant";
 // import TextField from "@material-ui/core/TextField";
 import { Button } from "react-bootstrap";
 // import OutlinedInput from "@material-ui/core/OutlinedInput";
@@ -19,10 +19,13 @@ import Logout from "../../assets/logout.png";
 import "./header.css";
 
 function HeaderPage() {
-  //   const history = useHistory();
-  //   const onRegisterClient = () => {
-  //     history.push(links.REGISTERCLIENT);
-  //   };
+    const history = useHistory();
+    const onAboutUs = () => {
+      history.push(links.ABOUTUS);
+    };
+    const onSuccessStories = () => {
+        history.push(links.SUCCESSSTORIES);
+      };
   //   const onRegisterArchitect = () => {
   //     history.push(links.REGISTERARCHITECT);
   //   };
@@ -59,7 +62,7 @@ function HeaderPage() {
             </div>
           </li>
 
-          <li className="header-start-listitem">
+          <li className="header-start-listitem" onClick={onAboutUs}>
             <div className="header-icon-container">
               <img
                 src={Info}
@@ -104,7 +107,7 @@ function HeaderPage() {
             </div>
           </li>
 
-          <li className="header-start-listitem">
+          <li className="header-start-listitem" onClick={onSuccessStories}>
             <div className="header-icon-container">
               <img
                 src={Star}
