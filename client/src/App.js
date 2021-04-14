@@ -21,6 +21,7 @@ function App() {
         <Router>
           <Switch>
             <Route path={links.LOGIN} component={LoginPage} />
+            <Route path={links.TUTORIAL} component={Tutorial} />
             <Route
               exact
               path={links.REGISTERCLIENT}
