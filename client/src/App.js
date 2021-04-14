@@ -21,6 +21,7 @@ function App() {
         <Router>
           <Switch>
             <Route path={links.LOGIN} component={LoginPage} />
+            <Route path={links.MYPROFILE} component={MyProfile} />
             <Route
               exact
               path={links.REGISTERCLIENT}
