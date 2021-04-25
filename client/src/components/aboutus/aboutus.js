@@ -3,6 +3,7 @@ import "./aboutus.css";
 import Header from "../header/header";
 import LOGO from "../../assets/logo.png";
 function AboutUsPage() {
+  
     window.watsonAssistantChatOptions = {
         integrationID: "8e54fa4b-e6ed-490c-b205-0deca680a424", // The ID of this integration.
         region: "eu-gb", // The region your integration is hosted in.
@@ -14,6 +15,7 @@ function AboutUsPage() {
       t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
       document.head.appendChild(t);
     });
+
     return (
         <div className='row aboutus-container'> 
             <div className= 'col-3 header-part'>
@@ -37,7 +39,9 @@ function AboutUsPage() {
        </div>
 
             </div>
+           
             </div>
+            
 
     );
 }
