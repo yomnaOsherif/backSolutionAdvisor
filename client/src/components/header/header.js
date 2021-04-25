@@ -19,6 +19,11 @@ import Logout from "../../assets/logout.png";
 import "./header.css";
 
 function HeaderPage() {
+
+  const onLogout = () => {
+   localStorage.clear();
+   history.push(links.LOGIN);
+  };
     const history = useHistory();
     const onAboutUs = () => {
       history.push(links.ABOUTUS);
@@ -33,7 +38,35 @@ function HeaderPage() {
   //  window.location.href = 'https://fujairah.ae/en/pages/about.aspx';
   // };
 
+  const test = ()=> {
+    return (
+      <li className="header-start-listitem">
+    <div className="header-icon-container">
+      <img
+        src={Upload}
+        width="40"
+        alt="icon"
+        style={{
+          position: "relative",
+          right: "22px",
+          bottom: "2px",
+          background: "black",
+          borderRadius: "25%",
+          padding: "6px",
+        }}
+      />
+    </div>
+    <div className="header-text-container">
+      <div className="header-list-title">
+        <p>Upload Documents</p>
+      </div>
+    </div>
+  </li>
+    )
+  }
+
   return (
+
     <div className="main-sidebar">
       <Button className="wrapperbtn btn-bars" id="menu-toggle">
         <i className="baricn fa fa-bars" /> &nbsp;&nbsp;IBM Solution Advisor
@@ -83,29 +116,8 @@ function HeaderPage() {
               </div>
             </div>
           </li>
+          {localStorage.getItem('auth') === "true" ? test() : '' }
 
-          <li className="header-start-listitem">
-            <div className="header-icon-container">
-              <img
-                src={Upload}
-                width="40"
-                alt="icon"
-                style={{
-                  position: "relative",
-                  right: "22px",
-                  bottom: "2px",
-                  background: "black",
-                  borderRadius: "25%",
-                  padding: "6px",
-                }}
-              />
-            </div>
-            <div className="header-text-container">
-              <div className="header-list-title">
-                <p>Upload Documents</p>
-              </div>
-            </div>
-          </li>
 
           <li className="header-start-listitem" onClick={onSuccessStories}>
             <div className="header-icon-container">
@@ -130,7 +142,7 @@ function HeaderPage() {
             </div>
           </li>
 
-          <li className="header-start-listitem">
+          <li className="header-start-listitem" onClick={onLogout}>
             <div className="header-icon-container">
               <img
                 src={Logout}
@@ -155,6 +167,8 @@ function HeaderPage() {
       </div>
     </div>
   );
+
+  
 }
 
 export default HeaderPage;

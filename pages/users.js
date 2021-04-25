@@ -3,6 +3,8 @@ const mongoose = require("mongoose")
 const bcrypt = require('bcrypt')
 const User = require("../models/User");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const tokenKey = require("../config/keys").secretOrKey;
 
 
 router.get("/", async (req, res) => {
@@ -11,29 +13,78 @@ router.get("/", async (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    const {
-        name,
-        email,
-        password,
-        phonenumber,
-        role} = req.body
-    const user = await User.findOne({ email })
-    if (user) return res.status(400).json({ error: 'Email already exists' })
+    try {
 
-   const salt = bcrypt.genSaltSync(10)
-   const hashedPassword = bcrypt.hashSync(password, salt)
-    const newUser = new User({
-        name,
-        email,
-        password:hashedPassword,
-        phonenumber,
-        role
-    })
-    newUser
-        .save()
-        .then(user => res.json({ data: user }))
-        .catch(err => res.json({ error: 'Can not create user' }))
+        const {
+            name,
+            email,
+            password,
+            role} = req.body
+    
+        const user = await User.findOne({ email });
+
+        if (user) return res.status(400).json({ message: 'Email already exists' });
+    
+       const salt = bcrypt.genSaltSync(10)
+       const hashedPassword = bcrypt.hashSync(password, salt)
+        const newUser = new User({
+            name,
+            email,
+            password:hashedPassword,
+            role
+        });
+    
+        await newUser.save();
+    
+        return res.status(200).json({message: "User Created Successfully"});
+
+    } catch(error){
+        console.log(error.message);
+        return res.status(500).json({message: "Try again later"});
+    }
+
 })
+
+router.post("/login", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      const user = await User.findOne({ email });
+      if (!user) return res.status(404).json({ email: "Email does not exist" });
+      const match = bcrypt.compareSync(password, user.password);
+      if (match) {
+        const payload = {
+          id: user.id,
+          role: user.role
+        };
+        const token = jwt.sign(payload, tokenKey, { expiresIn: "1h" });
+       let isAuth = false;
+        if(user.role == "Architect") isAuth=true;
+        return res.json({ token: `Bearer ${token}` , isAuth });
+      } else return res.status(400).send({ password: "Wrong password" });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({message: "Try again later"});
+    }
+  });
+
+  router.get("/:id", async (req, res) => {
+      try{
+        const ID = req.params.id;
+        const user = await User.findById({ _id:ID }).orFail(()=> {
+            return res.status(401).json({message: "user not found"});
+        })
+        const type = user.role;
+        console.log(user);
+        console.log(type);
+        res.json({ data: user });
+
+      } catch(error){
+        console.log(error.message);
+        return res.status(500).json({message: "Try again later"});
+      }
+  
+  });
+
 
 router.put('/update/:id', async (req, res) => {
     try {

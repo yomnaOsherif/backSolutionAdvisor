@@ -1,4 +1,5 @@
 import React from "react";
+import { useState} from "react";
 import { useHistory } from "react-router-dom";
 import links from "../../App.constant";
 import TextField from "@material-ui/core/TextField";
@@ -13,9 +14,47 @@ import IconButton from "@material-ui/core/IconButton";
 import logo from "../../assets/logo.png";
 import google from "../../assets/google.png";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import axios  from 'axios';
+import { toast } from "react-toastify";
 import "./register-client.css";
 
-function RegisterClientPage() {
+export const RegisterClientPage = (props) => {
+  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm_password, setConfirm_password] = useState("");
+
+
+  const register = (e) => {
+    e.preventDefault();
+
+    if (password === confirm_password) {
+        axios.post('http://localhost:5000/api/users/register', {
+        name,
+        email,
+        password,
+        confirm_password,
+        role: "Client"
+      }, {
+        withCredentials: true
+      }).then(res => {
+        console.log("registered successfully");
+        history.push('/login')
+        toast.success('User Created Successfully')
+      }).catch(err => {
+        if (err.message.includes('400')) 
+           return toast.error("email already exists!");
+        
+        return toast.error("try again later")
+      });
+    } else {
+      toast.error("Password Doesn't Match")
+    }
+
+
+  }
+
   const history = useHistory();
   const onBack = () => {
     history.push(links.LOGIN);
@@ -26,6 +65,7 @@ function RegisterClientPage() {
     weight: "",
     weightRange: "",
     showPassword: false,
+    showPassword2: false
   });
 
   const handleChange = (prop) => (event) => {
@@ -34,6 +74,10 @@ function RegisterClientPage() {
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleClickShowPassword2 = () => {
+    setValues({ ...values, showPassword2: !values.showPassword2 });
   };
 
   const handleMouseDownPassword = (event) => {
@@ -80,8 +124,10 @@ function RegisterClientPage() {
               className="username-field"
               id="Fname"
               label="Full Name*"
-              type="name"
+              type="text"
               variant="outlined"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
 
             <div className="headlines">
@@ -93,6 +139,8 @@ function RegisterClientPage() {
               label="Email Address*"
               type="email"
               variant="outlined"
+              value={email} 
+              onChange={e => setEmail(e.target.value)}
             />
             <div className="headlines">
               <p>Create a Password</p>
@@ -104,8 +152,8 @@ function RegisterClientPage() {
               <OutlinedInput
                 id="outlined-adornment-password"
                 type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
+                value={values.password || password}
+                onChange={e => setPassword(e.target.value)}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -131,18 +179,18 @@ function RegisterClientPage() {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
+                type={values.showPassword2 ? "text" : "password"}
+                value={confirm_password}
+                onChange={e => setConfirm_password(e.target.value) && handleChange("password")}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
+                      onClick={handleClickShowPassword2}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {values.showPassword2 ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -158,7 +206,7 @@ function RegisterClientPage() {
             </div>
 
             <div className="btn-container">
-              <Button className="btn2" type="submit" label="register">
+              <Button className="btn2" type="submit" label="register" onClick={register}>
                 REGISTER ACCOUNT
               </Button>
 
@@ -183,4 +231,4 @@ function RegisterClientPage() {
   );
 }
 
-export default RegisterClientPage;
+// export default RegisterClientPage;
