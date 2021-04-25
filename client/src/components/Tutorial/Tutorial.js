@@ -1,81 +1,45 @@
-import React, { useContext } from 'react'
-
+import React from 'react'
 import { ReactVideo } from "reactjs-media";
+import Header from "../header/header";
+import "./Tutorial.css";
 
 
-export function Tutorial(props) {
-    const [values, setValues] = React.useState({
-        userid : "",
-        
-      });
+function Tutorial() {
+ 
+    window.watsonAssistantChatOptions = {
+        integrationID: "04e6735c-841e-43c9-8b7f-df2589f7f867", // The ID of this integration.
+        region: "eu-gb", // The region your integration is hosted in.
+        serviceInstanceID: "37d1932d-93f5-4415-9028-67cb1def77e9", // The ID of your service instance.
+        onLoad: function(instance) { instance.render(); }
+      };
+    setTimeout(function(){
+      const t=document.createElement('script');
+      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+      document.head.appendChild(t);
+    });
 
-      return <div>
-
-
-        <div class="wrapper">
-        
-        <nav id="sidebar">
-            <div class="sidebar-header">
-            <span class="glyphicon glyphicon-align-justify"></span><p> IBM Solution Advisor </p>
-            </div>
-
-            <ul class="list-unstyled components">
-               
-                <li >
-                <a href="http://localhost:3000/my">MyProfile</a>
-                    
-                </li>
-                <li>
-                    <a href="#">About Us</a>
-                </li>
-               
-                <li>
-                    <a href="#"> Tutorial</a>
-                </li>
-                <li>
-                    <a href="#"> Log out </a>
-                </li>
-            </ul>
-
-           
-        </nav>
-
-     
-        <div id="content">
-        <nav class="navbar ">
-  <a class="topnav-right" href="#">
-  
-  <div >col-sm-8</div>
-
-  </a>
-</nav>
-<div >
-<div class='container'>  <h1>Tutorial</h1>
-<br></br>
-            <h6> Watch this Tutorial to get a full idea of how to use IBM Solution Advisor  </h6>
-            <br></br>
-            </div>
-            <div class='container'>
-            <ReactVideo
+      return (
+          
+      <div>
+         <div className='row tutorial-container'>
+            <div className='col-3 tutorial-container'>
+        <Header/>
+        </div>
+        <div className='col-9 the-rest-tutorial'>
+         <div className="title-tutorial"> <h1>Tutorial</h1> </div>
+         <div className=" tut-content">
+         <h6> Watch this Tutorial to get a full idea of how to use IBM Solution Advisor  </h6>
+         <ReactVideo
                 src="https://www.example.com/url_to_video.mp4"
                 poster="https://www.example.com/poster.png"
                 primaryColor="blue"
-                fluid={false} width={100} height={50}
             />
-        </div>
- <div class='container'>
- <br></br>
-
- <h6>Or take a tour in the solution Advisor </h6>
- <br></br>
-            <div>
-
-            <button type="submit" class="btn btn-primary"> Let's Take a tour  </button>
-            </div>
- </div>
+            
 
 </div>
-            </div>
-    </div>
-        </div>
-    }
+</div>
+</div>
+</div>   
+    ); 
+}
+export default Tutorial;

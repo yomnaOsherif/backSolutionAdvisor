@@ -6,6 +6,7 @@ const links = {
   ABOUTUS: "/about-us",
   SUCCESSSTORIES: "/success-stories",
   UPLOAD:"/Upload",
+  TUTORIAL: "/tutorial",
   HEADER: "/header",
 };
 
