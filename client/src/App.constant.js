@@ -5,7 +5,8 @@ const links = {
   REGISTERARCHITECT: "/register-architect",
   ABOUTUS: "/about-us",
   SUCCESSSTORIES: "/success-stories",
-
+  UPLOAD:"/Upload",
+  TUTORIAL: "/tutorial",
   HEADER: "/header",
 };
 

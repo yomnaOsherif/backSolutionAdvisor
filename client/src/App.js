@@ -11,6 +11,7 @@ import HeaderPage from "./components/header/header";
 import LandingPage from './components/landing/landing';
 import AboutUsPage from './components/aboutus/aboutus';
 import SuccessStoriesPage from './components/success-stories/success-stories';
+import Tutorial from './components/Tutorial/Tutorial';
 
 import "./App.css";
 
@@ -21,6 +22,7 @@ function App() {
         <Router>
           <Switch>
             <Route path={links.LOGIN} component={LoginPage} />
+            <Route path={links.TUTORIAL} component={Tutorial} />
             <Route
               exact
               path={links.REGISTERCLIENT}
