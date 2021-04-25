@@ -1,4 +1,5 @@
 import React from "react";
+import { useState} from "react";
 import { useHistory } from "react-router-dom";
 import links from "../../App.constant";
 import TextField from "@material-ui/core/TextField";
@@ -14,9 +15,75 @@ import logo from "../../assets/logo.png";
 import Icon1 from "../../assets/icon1.png";
 import Icon2 from "../../assets/icon2.png";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import axios  from 'axios';
+import { toast } from "react-toastify";
 import "./login.css";
 
-function LoginPage() {
+export const  LoginPage = (props) => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [roles] = React.useState({
+  //   isArchitect: false,
+  //   isClient: false,
+  //   type:""
+  // });
+
+  const Login = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/users/login', {
+      email,
+      password,
+    }, {
+      withCredentials: true
+    }).then(res => {
+      console.log("successfully Logged In");
+      toast.success('successfully Logged In')
+      console.log("res.body:", res.data.token);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("auth", res.data.isAuth.toString());
+      if(res.data.isAuth) history.push('/about-us')
+      else  history.push('/success-stories')
+    }).catch(err => {
+      if (err.message) 
+         return toast.error("email or password is incorrect, please Try again!");
+      
+      return toast.error("try again later")
+    });
+    
+  }
+
+// const Type = (e) => { 
+//   e.preventDefault();
+//   axios.get('http://localhost:5000/api/users/' + email, {
+//     withCredentials: true
+//   }).then(res => res.json())
+//       .then(user =>
+//         React.setState(
+//           { type: user.data.type },
+//           React.setState(
+//             { id: user.data.id }
+//           )
+//         )
+//       );
+//       console.log(React.state.type);
+//       console.log(React.state.id);
+//       if (React.state.type === "Architect") {
+//         React.setState({ isArchitect: true });
+//       } else {
+//         React.setState({ isClient: true })
+//       }
+//       localStorage.setItem("userid", React.state.id);
+//     }
+  
+  // const  isAuthenticated = (e) => {
+  //     const token = localStorage.getItem("token");
+  //     if (token && token.length > 10) {
+  //       return true;
+  //     }
+  //     return false;
+  //   }
+
   const history = useHistory();
   const onRegisterClient = () => {
     history.push(links.REGISTERCLIENT);
@@ -49,7 +116,13 @@ function LoginPage() {
   };
 
   return (
+   
     <div className="wrapper">
+       {/* {isAlreadyAuthenticated && React.state.isArchitect && !roles.isArchitect ? (
+      <Redirect to={{ pathname: "/about-us" }} />
+    ) : isAlreadyAuthenticated && React.state.isClient && !roles.isClient ? (
+      <Redirect to={{ pathname: "/success-stories" }} />
+    ) : ( */}
       <div className="row container-row">
         <div className="col-6 left">
           <div className="main">
@@ -119,15 +192,17 @@ function LoginPage() {
             </div>
 
             <div className="sub-title">
-              <p>Enter your username and password to log in</p>
+              <p>Enter your email and password to log in</p>
             </div>
 
             <TextField
               className="login-username-field"
-              id="username"
-              label="Username"
-              type="username"
+              id="email"
+              label="Email"
+              type="email"
               variant="outlined"
+              value={email} 
+              onChange={e => setEmail(e.target.value)}
             />
 
             <FormControl className="login-pass-textfield" variant="outlined">
@@ -137,8 +212,8 @@ function LoginPage() {
               <OutlinedInput
                 id="outlined-adornment-password"
                 type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
+                value={values.password || password}
+                onChange={e => setPassword(e.target.value) && handleChange("password")}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -156,15 +231,17 @@ function LoginPage() {
             </FormControl>
 
             <div className="btn-container">
-              <Button className="btn" type="submit" label="Login">
+              <Button className="btn" type="submit" label="Login" onClick={Login}>
                 LOGIN
               </Button>
             </div>
           </form>
         </div>
       </div>
+      {/* )} */}
     </div>
+     
   );
 }
 
-export default LoginPage;
+// export default LoginPage;
