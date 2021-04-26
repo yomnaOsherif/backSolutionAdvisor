@@ -16,7 +16,7 @@ function SuccessStoriesPage() {
             <div className='col-3 header-container'>
         <Header/>
         </div>
-        <div className='col-9 the-rest'>
+        <div className='col-8 the-rest'>
          <div className="title-success"> Success Stories </div>
         <div className=" d-flex top-content">
                 <Card className="card-item-success">

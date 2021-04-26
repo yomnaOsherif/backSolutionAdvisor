@@ -21,7 +21,7 @@ function AboutUsPage() {
             <div className= 'col-3 header-part'>
             <Header/>
             </div>
-            <div className= 'col-9 content-part'>
+            <div className= 'col-7 content-part'>
             <div className="logo-aboutUs" >
             <img src={LOGO}  width="110px" alt="ibm"/>
       </div> 

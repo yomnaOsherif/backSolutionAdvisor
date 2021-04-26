@@ -25,14 +25,15 @@ function Tutorial() {
             <div className='col-3 tutorial-container'>
         <Header/>
         </div>
-        <div className='col-9 the-rest-tutorial'>
+        <div className='col-7 the-rest-tutorial'>
          <div className="title-tutorial"> <h1>Tutorial</h1> </div>
          <div className=" tut-content">
-         <h6> Watch this Tutorial to get a full idea of how to use IBM Solution Advisor  </h6>
+         <h6 className="subtitle-tut"> Watch this Tutorial to get a full idea of how to use IBM Solution Advisor  </h6>
          <ReactVideo
-                src="https://www.example.com/url_to_video.mp4"
-                poster="https://www.example.com/poster.png"
-                primaryColor="blue"
+                src="https://storage.coverr.co/videos/BALBxhjqfldnwtv00YopEAA014UtVoZo00R?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6Ijg3NjdFMzIzRjlGQzEzN0E4QTAyIiwiaWF0IjoxNjExMjc0NTQwfQ.rVZT49viuSpaSaXUkejPw3N9cvSHbxmSwhrnDUKJCMc"
+                 //src="../assets/videoplayback.mp4"
+                poster="https://i2.wp.com/hotinformationonline.com/wp-content/uploads/2021/02/IBM-.png?ssl=1"
+                primaryColor="red"
             />
             
 

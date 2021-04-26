@@ -15,6 +15,7 @@ import Profile from "../../assets/person.png";
 import Star from "../../assets/star.png";
 import Upload from "../../assets/upload.png";
 import Logout from "../../assets/logout.png";
+import tut from "../../assets/tut.png";
 // import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import "./header.css";
 
@@ -28,6 +29,10 @@ function HeaderPage() {
     const onAboutUs = () => {
       history.push(links.ABOUTUS);
     };
+
+    const onTutorial = () => {
+      history.push(links.TUTORIAL);
+    };
     const onSuccessStories = () => {
         history.push(links.SUCCESSSTORIES);
       };
@@ -38,7 +43,7 @@ function HeaderPage() {
   //  window.location.href = 'https://fujairah.ae/en/pages/about.aspx';
   // };
 
-  const test = ()=> {
+  const architect1 = ()=> {
     return (
       <li className="header-start-listitem">
     <div className="header-icon-container">
@@ -62,8 +67,61 @@ function HeaderPage() {
       </div>
     </div>
   </li>
+
     )
   }
+
+  const architect2 = ()=> {
+    return (
+  <li className="header-start-listitem" onClick={onSuccessStories}>
+            <div className="header-icon-container">
+              <img
+                src={Star}
+                width="40"
+                alt="icon"
+                style={{
+                  position: "relative",
+                  right: "34px",
+                  bottom:"3px",
+                  background: "black",
+                  borderRadius: "25%",
+                  padding: "6px",
+                }}
+              />
+            </div>
+            <div className="header-text-container">
+              <div className="header-list-title">
+                <p>Success Stories</p>
+              </div>
+            </div>
+          </li>
+           )
+          }
+
+          const client1 = ()=> {
+            return (
+          <li className="header-start-listitem" onClick={onTutorial}>
+                    <div className="header-icon-container">
+                      <img
+                        src={tut}
+                        width="40"
+                        alt="icon"
+                        style={{
+                          position: "relative",
+                          right: "70px",
+                          borderRadius: "25%",
+                          padding: "2px",
+                        }}
+                      />
+                    </div>
+                    <div className="header-text-container">
+                      <div className="header-list-title">
+                        <p>Tutorial</p>
+                      </div>
+                    </div>
+                  </li>
+                   )
+                  }
 
   return (
 
@@ -116,31 +174,9 @@ function HeaderPage() {
               </div>
             </div>
           </li>
-          {localStorage.getItem('auth') === "true" ? test() : '' }
-
-
-          <li className="header-start-listitem" onClick={onSuccessStories}>
-            <div className="header-icon-container">
-              <img
-                src={Star}
-                width="40"
-                alt="icon"
-                style={{
-                  position: "relative",
-                  right: "34px",
-                  bottom:"3px",
-                  background: "black",
-                  borderRadius: "25%",
-                  padding: "6px",
-                }}
-              />
-            </div>
-            <div className="header-text-container">
-              <div className="header-list-title">
-                <p>Success Stories</p>
-              </div>
-            </div>
-          </li>
+          {localStorage.getItem('auth') === "true" ? architect1() : '' }
+          {localStorage.getItem('auth') === "true" ? architect2() : '' }
+          {localStorage.getItem('auth') === "false" ? client1() : '' }
 
           <li className="header-start-listitem" onClick={onLogout}>
             <div className="header-icon-container">

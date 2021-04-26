@@ -42,8 +42,8 @@ export const  LoginPage = (props) => {
       console.log("res.body:", res.data.token);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("auth", res.data.isAuth.toString());
-      if(res.data.isAuth) history.push('/about-us')
-      else  history.push('/success-stories')
+      if(res.data.isAuth) history.push('/success-stories')
+      else  history.push('/tutorial')
     }).catch(err => {
       if (err.message) 
          return toast.error("email or password is incorrect, please Try again!");
