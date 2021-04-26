@@ -71,32 +71,7 @@ function HeaderPage() {
     )
   }
 
-  const architect2 = ()=> {
-    return (
-  <li className="header-start-listitem" onClick={onSuccessStories}>
-            <div className="header-icon-container">
-              <img
-                src={Star}
-                width="40"
-                alt="icon"
-                style={{
-                  position: "relative",
-                  right: "34px",
-                  bottom:"3px",
-                  background: "black",
-                  borderRadius: "25%",
-                  padding: "6px",
-                }}
-              />
-            </div>
-            <div className="header-text-container">
-              <div className="header-list-title">
-                <p>Success Stories</p>
-              </div>
-            </div>
-          </li>
-           )
-          }
+  
 
           const client1 = ()=> {
             return (
@@ -175,7 +150,28 @@ function HeaderPage() {
             </div>
           </li>
           {localStorage.getItem('auth') === "true" ? architect1() : '' }
-          {localStorage.getItem('auth') === "true" ? architect2() : '' }
+          <li className="header-start-listitem" onClick={onSuccessStories}>
+            <div className="header-icon-container">
+              <img
+                src={Star}
+                width="40"
+                alt="icon"
+                style={{
+                  position: "relative",
+                  right: "34px",
+                  bottom:"3px",
+                  background: "black",
+                  borderRadius: "25%",
+                  padding: "6px",
+                }}
+              />
+            </div>
+            <div className="header-text-container">
+              <div className="header-list-title">
+                <p>Success Stories</p>
+              </div>
+            </div>
+          </li>
           {localStorage.getItem('auth') === "false" ? client1() : '' }
 
           <li className="header-start-listitem" onClick={onLogout}>
