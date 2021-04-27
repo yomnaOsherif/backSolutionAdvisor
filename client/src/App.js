@@ -12,8 +12,10 @@ import LandingPage from './components/landing/landing';
 import AboutUsPage from './components/aboutus/aboutus';
 import SuccessStoriesPage from './components/success-stories/success-stories';
 import Tutorial from './components/Tutorial/Tutorial';
-
+import { MyProfile } from "./components/Myprofile/Myprofile";
 import "./App.css";
+import { Upload } from "./components/UploadDoc/Upload";
+
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Switch>
             <Route path={links.LOGIN} component={LoginPage} />
             <Route path={links.TUTORIAL} component={Tutorial} />
+            <Route path={links.UPDATE} component={MyProfile} />
+            <Route path={links.UPLOAD} component={Upload} />
             <Route
               exact
               path={links.REGISTERCLIENT}
