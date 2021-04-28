@@ -36,6 +36,12 @@ function HeaderPage() {
     const onSuccessStories = () => {
         history.push(links.SUCCESSSTORIES);
       };
+      const onUpdateProfile = () => {
+        history.push(links.UPDATE);
+      };
+      const onUploadDocument = () => {
+        history.push(links.UPLOAD);
+      };
   //   const onRegisterArchitect = () => {
   //     history.push(links.REGISTERARCHITECT);
   //   };
@@ -45,7 +51,7 @@ function HeaderPage() {
 
   const architect1 = ()=> {
     return (
-      <li className="header-start-listitem">
+      <li className="header-start-listitem" onClick={onUploadDocument}>
     <div className="header-icon-container">
       <img
         src={Upload}
@@ -106,7 +112,7 @@ function HeaderPage() {
       </Button>
       <div className="list-group-container">
         <ul className="list-group">
-          <li className="header-start-listitem">
+          <li className="header-start-listitem" onClick={onUpdateProfile}>
             <div className="header-icon-container">
               <img
                 src={Profile}
