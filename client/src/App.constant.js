@@ -5,10 +5,10 @@ const links = {
   REGISTERARCHITECT: "/register-architect",
   ABOUTUS: "/about-us",
   SUCCESSSTORIES: "/success-stories",
-  UPLOAD:"/Upload",
+  UPLOAD:"/upload-document",
   TUTORIAL: "/tutorial",
   HEADER: "/header",
-  UPDATE:"/my"
+  UPDATE:"/my-profile"
 };
 
 export default links;
