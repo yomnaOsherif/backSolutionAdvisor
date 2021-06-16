@@ -1,8 +1,8 @@
 import React, {useState } from 'react'
-
 import { Button } from "react-bootstrap";
-
 import Header from "../header/header";
+import Discovery from "../discovery/discovery";
+
 export function Upload() {
     const [selectedFile, setSelectedFile] = useState();
 const [ isSelected ,setIsSelected] = useState(false);
@@ -19,31 +19,20 @@ const [ isSelected ,setIsSelected] = useState(false);
     };
     const handleSubmission = () => {
 		const formData = new FormData();
-
 		formData.append('File', selectedFile);
-
-		fetch(
-			'https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>',
-			{
-				method: 'POST',
-				body: formData,
-			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
+			
 	};
+    const handleRecommendation = ()=> {
+
+        
+    };
    
     return(
         
         
 <div class="row">
 <div class="col-4">
-    
+    <Discovery/>
 <Header/>
 </div>
 <div class="col-8 align-self-center">
@@ -76,9 +65,15 @@ const [ isSelected ,setIsSelected] = useState(false);
       Submit your File
       </Button>
                  </div>
+                 <div>
+                 <Button onClick={handleRecommendation}>
+      Get Recommendation
+      </Button>
              </div></div>
              </div>
              </div>
+             </div>
+
          )
 
 
