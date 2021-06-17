@@ -20,10 +20,11 @@ const [ isSelected ,setIsSelected] = useState(false);
     const handleSubmission = () => {
 		const formData = new FormData();
 		formData.append('File', selectedFile);
+
 			
 	};
     const handleRecommendation = ()=> {
-
+            <Discovery/>
         
     };
    
@@ -32,7 +33,6 @@ const [ isSelected ,setIsSelected] = useState(false);
         
 <div class="row">
 <div class="col-4">
-    <Discovery/>
 <Header/>
 </div>
 <div class="col-8 align-self-center">
