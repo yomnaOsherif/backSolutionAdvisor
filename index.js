@@ -23,11 +23,21 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
 
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: "*",
+//     allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token", "Access-Control-Allow-Headers" ,"Access-Control-Allow-Credentials"],
+//   })
+// );
 app.use(
   cors({
     credentials: true,
     origin: "*",
-    allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token", "Access-Control-Allow-Headers" ,"Access-Control-Allow-Credentials"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token"],
+    optionsSuccessStatus: 204,
+    preflightContinue: false,
   })
 );
 
