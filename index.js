@@ -26,10 +26,8 @@ mongoose
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://localhost:3000",
-      "https://iam.cloud.ibm.com/identity/token",
-    ],
+    origin: "*",
+    allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token", "Access-Control-Allow-Headers" ,"Access-Control-Allow-Credentials"],
   })
 );
 
