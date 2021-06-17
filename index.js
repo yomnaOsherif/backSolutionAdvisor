@@ -6,14 +6,12 @@ const db = require("./config/keys").mongoURI
 const users = require("./pages/users")
 app.use(express.json())
 
+console.log(typeof db)
 // Connect to mongo
-mongoose
-  .connect(db, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true 
-  })
+mongoose.connect(db, {
+      useNewUrlParser: true,
+      useCreateIndex: true
+    })
   .then(() => console.log("Connected to MongoDB"))
   .catch(err => console.log(err))
 
