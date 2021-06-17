@@ -1,19 +1,16 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const cors = require('cors');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const app = express()
-const db = require("./config/keys").mongoURI
-const users = require("./pages/users")
+const app = express();
+const db = require("./config/keys").mongoURI;
+const users = require("./pages/users");
 const path = require("path");
 
-app.use(express.json())
+app.use(express.json());
 app.set("views", path.join(__dirname, "views"));
-
-
-
 
 // Connect to mongo
 mongoose
@@ -21,15 +18,20 @@ mongoose
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.log(err))
+  .catch((err) => console.log(err));
 
-app.use(cors({
-  credentials: true,
-  origin: "http://localhost:3000"
-}));
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "http://localhost:3000",
+      "https://iam.cloud.ibm.com/identity/token",
+    ],
+  })
+);
 
 // ------------------ helmet ---------------------------------
 app.use(
@@ -68,28 +70,23 @@ app.use(
 );
 
 // Pretty API Responses
-app.set('json spaces', 4);
+app.set("json spaces", 4);
 
-morgan.token('remote-addr', function(req) {
-  return req.headers['x-forwarded-for'] || req.ip;
+morgan.token("remote-addr", function (req) {
+  return req.headers["x-forwarded-for"] || req.ip;
 });
 
 // log the time taken in each request
 app.use(morgan("tiny"));
 
-
-
-
 app.use(express.static(`${__dirname}/clients/solution-advisor`));
 
-
-
-app.use("/api/users", users)
+app.use("/api/users", users);
 
 app.get("/", (req, res) => {
   // ------------- in production ---------------
-    // const token = req.csrfToken();
-    // res.cookie('XSRF-TOKEN', token);
+  // const token = req.csrfToken();
+  // res.cookie('XSRF-TOKEN', token);
   // --------------------------------
 
   // res.cookie('_csrf', token);
@@ -100,18 +97,16 @@ app.get("/", (req, res) => {
 // redirect client
 app.get("*", (req, res) => {
   // -------------in production---------------
-    // const token = req.csrfToken();
-    // res.cookie('XSRF-TOKEN', token);
+  // const token = req.csrfToken();
+  // res.cookie('XSRF-TOKEN', token);
   // --------------------------------
 
   // res.locals.csrfToken = token;
   res.sendFile(path.resolve("./clients/solution-advisor/index.html"));
 });
 app.use((req, res) => {
-    res.status(404).send({err: 'We can not find what you are looking for'});
- })
+  res.status(404).send({ err: "We can not find what you are looking for" });
+});
 
- 
-
-const port = process.env.PORT || 5000
-app.listen(port, () => console.log(`Server on ${port}`))
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`Server on ${port}`));
