@@ -1,8 +1,8 @@
 ---
 applications:
-  - name: solution-advisor-yomna
+  - name: solution-advisor
     memory: 128MB
     buildpack: sdk-for-nodejs
-    path: clients/solution-advisor/
-    # command: npm start
+    # path: clients/solution-advisor/
+    command: npm start
 
