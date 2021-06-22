@@ -1,8 +1,8 @@
 ---
 applications:
   - name: solution-advisor-yomna
-    memory: 64M
-    buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git
+    memory: 128MB
+    buildpack: sdk-for-nodejs
     # path: clients/solution-advisor/
     command: npm start
 
