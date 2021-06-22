@@ -4,5 +4,5 @@ applications:
     memory: 128MB
     buildpack: sdk-for-nodejs
     # path: clients/solution-advisor/
-    command: npm start
+    command: node index.js
 
