@@ -2,5 +2,7 @@
 applications:
   - name: solution-advisor-yomna
     memory: 64M
-    buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
-    path: build/
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git
+    # path: clients/solution-advisor/
+    command: npm start
+
