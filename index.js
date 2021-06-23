@@ -31,16 +31,14 @@ mongoose
 //   })
 // );
 app.use(
-  cors()
-  // cors({
-
-  //   // credentials: true,
-  //   // origin: "*",
-  //   // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  //   // allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token", "Access-Control-Allow-Origin"],
-  //   // optionsSuccessStatus: 204,
-  //   // preflightContinue: false,
-  // })
+  cors({
+    credentials: true,
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token", "Access-Control-Allow-Origin"],
+    optionsSuccessStatus: 204,
+    preflightContinue: false,
+  })
 );
 
 // ------------------ helmet ---------------------------------
