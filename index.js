@@ -46,7 +46,7 @@ const resolveCrossDomain = function(req, res,next) {
 }; 
 app.use(resolveCrossDomain);
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://3.20.237.235/:5000'}));
 
 // ------------------ helmet ---------------------------------
 app.use(
