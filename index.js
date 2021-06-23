@@ -30,16 +30,23 @@ mongoose
 //     allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token", "Access-Control-Allow-Headers" ,"Access-Control-Allow-Credentials"],
 //   })
 // );
-app.use(
-  cors({
-    credentials: true,
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token", "Access-Control-Allow-Origin"],
-    optionsSuccessStatus: 204,
-    preflightContinue: false,
-  })
-);
+// cors
+const resolveCrossDomain = function(req, res,next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header("Access-Control-Allow-Headers", "Content-Type, authorization");
+  res.header("Access-Control-Allow-Credentials", true);
+
+  if ('OPTIONS' == req.method) {
+      res.send(200);
+  }
+  else {
+      next();
+  }
+}; 
+app.use(resolveCrossDomain);
+
+app.use(cors());
 
 // ------------------ helmet ---------------------------------
 app.use(
