@@ -23,30 +23,37 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: "*",
-//     allowedHeaders: ["Content-Type", "Authorization", "origin", "x-csrf-token", "Access-Control-Allow-Headers" ,"Access-Control-Allow-Credentials"],
-//   })
-// );
+app.use(
+  cors({
+    // credentials: true,
+    origin: "*",
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "origin",
+      "x-csrf-token",
+      "Access-Control-Allow-Headers",
+      "Access-Control-Allow-Credentials",
+    ],
+  })
+);
 // cors
-const resolveCrossDomain = function(req, res,next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", "Content-Type, authorization");
-  res.header("Access-Control-Allow-Credentials", true);
+// const resolveCrossDomain = function(req, res,next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//   res.header("Access-Control-Allow-Headers", "Content-Type, authorization");
+//   res.header("Access-Control-Allow-Credentials", true);
 
-  if ('OPTIONS' == req.method) {
-      res.send(200);
-  }
-  else {
-      next();
-  }
-}; 
-app.use(resolveCrossDomain);
+//   if ('OPTIONS' == req.method) {
+//       res.send(200);
+//   }
+//   else {
+//       next();
+//   }
+// };
+// app.use(resolveCrossDomain);
 
-app.use(cors({credentials: true, origin: 'http://3.20.237.235/:5000'}));
+// app.use(cors({credentials: true, origin: 'http://3.20.237.235/:5000'}));
 
 // ------------------ helmet ---------------------------------
 app.use(
