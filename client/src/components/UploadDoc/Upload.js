@@ -1,85 +1,104 @@
-import React, {useState } from 'react'
-
+import React from 'react'
 import { Button } from "react-bootstrap";
-
 import Header from "../header/header";
-export function Upload() {
-    const [selectedFile, setSelectedFile] = useState();
-const [ isSelected ,setIsSelected] = useState(false);
+//import Discovery from "../discovery/discovery";
+import axios  from 'axios';
+import { environment } from "../../Environments/environment";
+import { toast } from "react-toastify";
 
-	const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-       
-		setIsSelected(true);
-    }
-    const hiddenFileInput = React.useRef(null);
-  
-    const handleClick = event => {
-      hiddenFileInput.current.click();
-    };
-    const handleSubmission = () => {
-		const formData = new FormData();
+class Upload extends React.Component {
+  constructor() {
+  super();
+  //const [selectedFile, setSelectedFile] = this.state();
+  //const [ isSelected ,setIsSelected] = this.state(false);
 
-		formData.append('File', selectedFile);
+  this.state = {
+    solution: "",
+    confidence: "",
+    selectedFile:[],
+  setSelectedFile:[],
+  isSelected: false,
+  setIsSelected: false
+ };
 
-		fetch(
-			'https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>',
-			{
-				method: 'POST',
-				body: formData,
-			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
-	};
-   
+}
+onFileChange = event => {
+    
+  // Update the state
+  this.setState({ selectedFile: event.target.files[0] });
+
+};
+onFileUpload = () => { 
+  // Create an object of formData 
+  const formData = new FormData(); 
+  // Update the formData object 
+  formData.append( 
+    "myFile", 
+    this.state.selectedFile, 
+    this.state.selectedFile.name,
+    this.state.selectedFile.type,
+    this.state.selectedFile.size
+  ); 
+  axios.post(environment.host + '/discoveryy/doc', {
+    formData
+  }).then(res => {
+    console.log("uploaded successfully");
+    toast.success('Document Uploaded Successfully')
+  })
+  }
+componentDidMount() {
+  //this.getRecommendation();
+  //this.fileData();
+ 
+}
+
+
+
+getRecommendation() {
+  axios.get(environment.host + '/discoveryy/rec').then(res => {
+    this.setState({ solution: res.data.data.result.results[0].answer, confidence: res.data.data.result.results[0].result_metadata.confidence });
+
+  });
+}
+
+
+
+   render(){
     return(
         
         
-<div class="row">
-<div class="col-4">
-    
+<div className="row">
+<div className="col-4">
 <Header/>
 </div>
-<div class="col-8 align-self-center">
+<div className="col-8 align-self-center">
        
-        <div id='container'> 
-        <h1>Upload Document </h1>
-        <p> Browse  your documents to  give you  recommandations for IBM Solution.<br></br>
-        Supported file types: CSV, TXT, PDF, DOC, DOCX, HTML, ZIP. <br></br>
-        <br></br>
-        For the best performance, limit the number of words in each document. Fewer than 2,000 words  is good, but closer to 1,000 words is better.<br></br>
-        <br></br>
-        </p>
-        <div><Button onClick={handleClick}>
-        Upload a file
-      </Button>
-      <br></br>
-                 <input type="file" ref={hiddenFileInput} name="file" onChange={changeHandler}  style={{display:'none'}} accept=".CSV, .TXT, .PDF, .DOC, .DOCX, .HTML, .ZIP" />
-                 {isSelected ? (
-                     <div>
-                         <p>Filename: {selectedFile.name}</p>
-                         <p>Filetype: {selectedFile.type}</p>
-                         <p>Size in bytes: {selectedFile.size}</p>
-                        
-                     </div>
-                 ) : (
-                     <p>Select a file to show details</p>
-                 )}
+<div> 
+                <input type="file" onChange={this.onFileChange} /> 
+                <Button onClick={this.onFileUpload}> 
+                  Upload File 
+                </Button> 
+            </div> 
+          Additional Information <br></br>
+   File type: {this.state.selectedFile.type} <br></br>
+  File Size in bytes: {this.state.selectedFile.size}
+
+
                  <div>
-                 <Button onClick={handleSubmission}>
-      Submit your File
+                 <Button onClick={this.getRecommendation.bind(this)}>
+      Get Recommendation
       </Button>
-                 </div>
-             </div></div>
+             </div>
+             <div>Solution Recommended {this.state.solution} <br></br>
+             Confidence Score {this.state.confidence}
+         </div>
              </div>
              </div>
+           
+
+
          )
 
-
-   ;}
+                 }
+                }
+export default Upload;
