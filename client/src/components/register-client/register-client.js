@@ -17,6 +17,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import axios  from 'axios';
 import { toast } from "react-toastify";
 import "./register-client.css";
+import { environment } from "../../Environments/environment";
 
 export const RegisterClientPage = (props) => {
   
@@ -30,7 +31,7 @@ export const RegisterClientPage = (props) => {
     e.preventDefault();
 
     if (password === confirm_password) {
-        axios.post('http://localhost:5000/api/users/register', {
+        axios.post( environment.host + '/users/register', {
         name,
         email,
         password,

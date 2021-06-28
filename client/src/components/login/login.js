@@ -18,6 +18,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import axios  from 'axios';
 import { toast } from "react-toastify";
 import "./login.css";
+import { environment } from "../../Environments/environment";
 
 export const  LoginPage = (props) => {
 
@@ -31,7 +32,7 @@ export const  LoginPage = (props) => {
 
   const Login = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/users/login', {
+    axios.post(environment.host + '/users/login', {
       email,
       password,
     }, {
