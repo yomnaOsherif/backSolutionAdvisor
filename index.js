@@ -4,6 +4,8 @@ const cors = require('cors');
 const app = express()
 const db = require("./config/keys").mongoURI
 const users = require("./pages/users")
+const disc = require("./pages/discoveryy")
+
 app.use(express.json())
 
 console.log(typeof db)
@@ -17,10 +19,12 @@ mongoose.connect(db, {
 
 app.use(cors({
   credentials: true,
-  origin: "http://localhost:3000"
+   origin: "http://localhost:3000"
+
 }));
 
 app.use("/api/users", users)
+app.use("/api/discoveryy", disc)
 app.use((req, res) => {
     res.status(404).send({err: 'We can not find what you are looking for'});
  })
