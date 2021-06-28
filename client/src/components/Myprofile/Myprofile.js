@@ -1,7 +1,6 @@
 
-import React, { useContext } from 'react'
+import React from 'react'
 import TextField from "@material-ui/core/TextField";
-import { Prompt } from 'react-router';
 import "./Myprofile.css"; 
 import Header from "../header/header";
 

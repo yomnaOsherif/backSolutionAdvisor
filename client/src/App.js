@@ -14,7 +14,7 @@ import SuccessStoriesPage from './components/success-stories/success-stories';
 import Tutorial from './components/Tutorial/Tutorial';
 import { MyProfile } from "./components/Myprofile/Myprofile";
 import "./App.css";
-import { Upload } from "./components/UploadDoc/Upload";
+import  Upload  from "./components/UploadDoc/Upload";
 
 
 function App() {
