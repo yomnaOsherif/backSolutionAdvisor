@@ -8,6 +8,7 @@ const links = {
   UPLOAD:"/Upload",
   TUTORIAL: "/tutorial",
   HEADER: "/header",
+  UPDATE:"/my"
 };
 
 export default links;
