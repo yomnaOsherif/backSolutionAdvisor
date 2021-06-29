@@ -6,3 +6,6 @@ applications:
     # path: clients/solution-advisor/
     command: node index.js
 
+  # - name: solution-advisor-yomna
+  #   memory: 64M
+  #   buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
