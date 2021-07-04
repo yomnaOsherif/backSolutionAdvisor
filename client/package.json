@@ -22,7 +22,9 @@
     "react-scripts": "4.0.3",
     "react-toastify": "^7.0.3",
     "reactjs-media": "^1.5.1",
-    "web-vitals": "^1.0.1"
+    "tesseract.js": "^2.1.4",
+    "web-vitals": "^1.0.1",
+    "worker-loader": "^0.8.1"
   },
   "scripts": {
     "start": "react-scripts start",

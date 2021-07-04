@@ -5,6 +5,8 @@ import Header from "../header/header";
 import axios  from 'axios';
 import { environment } from "../../Environments/environment";
 import { toast } from "react-toastify";
+import Tesseract from 'tesseract.js';
+
 
 class Upload extends React.Component {
   constructor() {
@@ -18,10 +20,32 @@ class Upload extends React.Component {
     selectedFile:[],
   setSelectedFile:[],
   isSelected: false,
-  setIsSelected: false
+  setIsSelected: false,
+  imagePath:"",
+  setImagePath:"",
+  text:"",
+  setText:""
+
  };
 
 }
+
+ 
+
+onFileRead = () =>{
+  const formData = new FormData(); 
+  // Update the formData object 
+  formData.append( 
+    "myFile", 
+    this.state.selectedFile
+  ); 
+  axios.post(environment.host + '/discoveryy/update', {
+    formData
+  }).then(res => {
+    toast.success('Document Read')
+  })
+}
+
 onFileChange = event => {
     
   // Update the state
@@ -52,16 +76,16 @@ componentDidMount() {
  
 }
 
-
-
+handleChange = (event) => {
+  this.setState({ setImagePath: event.target.files[0] });
+}
+//
 getRecommendation() {
   axios.get(environment.host + '/discoveryy/rec').then(res => {
     this.setState({ solution: res.data.data.result.results[0].answer, confidence: res.data.data.result.results[0].result_metadata.confidence });
 
   });
 }
-
-
 
    render(){
     return(
@@ -92,7 +116,13 @@ getRecommendation() {
              <div>Solution Recommended {this.state.solution} <br></br>
              Confidence Score {this.state.confidence}
          </div>
-             </div>
+         
+      
+        
+       
+
+        </div>
+
              </div>
            
 
