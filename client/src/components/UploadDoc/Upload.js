@@ -5,7 +5,6 @@ import Header from "../header/header";
 import axios  from 'axios';
 import { environment } from "../../Environments/environment";
 import { toast } from "react-toastify";
-import Tesseract from 'tesseract.js';
 
 
 class Upload extends React.Component {
@@ -15,16 +14,12 @@ class Upload extends React.Component {
   //const [ isSelected ,setIsSelected] = this.state(false);
 
   this.state = {
-    solution: "",
-    confidence: "",
-    selectedFile:[],
+  solution: "",
+  confidence: "",
+  selectedFile:[],
   setSelectedFile:[],
   isSelected: false,
-  setIsSelected: false,
-  imagePath:"",
-  setImagePath:"",
-  text:"",
-  setText:""
+  setIsSelected: false
 
  };
 
@@ -32,7 +27,7 @@ class Upload extends React.Component {
 
  
 
-onFileRead = () =>{
+/*onFileRead = () =>{
   const formData = new FormData(); 
   // Update the formData object 
   formData.append( 
@@ -44,7 +39,7 @@ onFileRead = () =>{
   }).then(res => {
     toast.success('Document Read')
   })
-}
+}*/
 
 onFileChange = event => {
     
@@ -66,7 +61,7 @@ onFileUpload = () => {
   axios.post(environment.host + '/discoveryy/doc', {
     formData
   }).then(res => {
-    console.log("uploaded successfully");
+    console.log("Document uploaded successfully");
     toast.success('Document Uploaded Successfully')
   })
   }
@@ -76,16 +71,17 @@ componentDidMount() {
  
 }
 
-handleChange = (event) => {
-  this.setState({ setImagePath: event.target.files[0] });
-}
-//
+
+
 getRecommendation() {
   axios.get(environment.host + '/discoveryy/rec').then(res => {
-    this.setState({ solution: res.data.data.result.results[0].answer, confidence: res.data.data.result.results[0].result_metadata.confidence });
-
-  });
-}
+    this.setState({ solution: res.data.data.result.results[0].answer });
+// , confidence: res.data.data.result.results[0].result_metadata.confidence
+  }).catch(err => {
+    if (err.message) 
+       return toast.error("Query failed to send. Please use a different document.");
+    
+})}
 
    render(){
     return(
