@@ -1,4 +1,6 @@
 const express = require("express");
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 const router = express.Router();
 const DiscoveryV1 = require('ibm-watson/discovery/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
@@ -25,6 +27,12 @@ disableSslVerification: true
 
 });
 
+
+
+// app.post('/profile', upload.single('avatar'), function (req, res, next) {
+//   // req.file is the `avatar` file
+//   // req.body will hold the text fields, if there were any
+// })
 
 
 // TODO: Specify the URL of your small PDF document (less than 1MB and 10 pages)
@@ -109,56 +117,57 @@ It then assigns the var queryy the statement to send later on with the discovery
 /*function to upload new document to discovery 
 It saves file uploaded in a const named newFile to add to params
 */
-    router.post("/doc", async (req, res) => {
-      const docReceived = req.body
-      //const namee= req.body.name
-    const newFile = new File({
-      docReceived
-    });
+    router.post("/doc", upload.single("myFile") ,async (req, res) => {
+      console.log(req.file);
+    //   const docReceived = req.body
+    //   //const namee= req.body.name
+    // const newFile = new File({
+    //   docReceived
+    // });
 
-// When you have your own Client ID and secret, put down their values here:
-console.log(newFile);
-var creds = require("../config/keys").YOUR_GOOGLE_JSON_KEY
-const processFile = require("./middleware");
-const { format } = require("util");
-const { Storage } = require("@google-cloud/storage");
-const storage = new Storage({ keyFilename: creds });
-const bucket = storage.bucket("solution_advisor_bucket");
+// // When you have your own Client ID and secret, put down their values here:
+// console.log(newFile);
+// var creds = require("../config/keys").YOUR_GOOGLE_JSON_KEY
+// const processFile = require("./middleware");
+// const { format } = require("util");
+// const { Storage } = require("@google-cloud/storage");
+// const storage = new Storage({ keyFilename: creds });
+// const bucket = storage.bucket("solution_advisor_bucket");
 
-////
-    // Create a new blob in the bucket and upload the file data.
-    const blob = bucket.file(newFile.name);
-    console.log(blob);
+// ////
+//     // Create a new blob in the bucket and upload the file data.
+//     const blob = bucket.file(newFile.name);
+//     console.log(blob);
 
-    const blobStream = blob.createWriteStream({
-      resumable: false,
-    });
-    blobStream.on("error", (err) => {
-      res.status(500).send({ message: err.message });
-    });
+//     const blobStream = blob.createWriteStream({
+//       resumable: false,
+//     });
+//     blobStream.on("error", (err) => {
+//       res.status(500).send({ message: err.message });
+//     });
 
-    blobStream.on("finish", async (data) => {
-      // Create URL for directly file access via HTTP.
-      const publicUrl = format(
-        `https://storage.googleapis.com/${bucket.name}/${blob.name}`
-      );
-      try {
-        // Make the file public
-        await bucket.file(req.file.originalname).makePublic();
-      } catch {
-        return res.status(500).send({
-          message:
-            `Uploaded the file successfully: ${req.file.originalname}, but public access is denied!`,
-          url: publicUrl,
-        });
-      }
+//     blobStream.on("finish", async (data) => {
+//       // Create URL for directly file access via HTTP.
+//       const publicUrl = format(
+//         `https://storage.googleapis.com/${bucket.name}/${blob.name}`
+//       );
+//       try {
+//         // Make the file public
+//         await bucket.file(req.file.originalname).makePublic();
+//       } catch {
+//         return res.status(500).send({
+//           message:
+//             `Uploaded the file successfully: ${req.file.originalname}, but public access is denied!`,
+//           url: publicUrl,
+//         });
+//       }
 
-      res.status(200).send({
-        message: "Uploaded the file successfully: " + req.file.originalname,
-        url: publicUrl,
-      });
-    });
-    blobStream.end(req.file.buffer);
+//       res.status(200).send({
+//         message: "Uploaded the file successfully: " + req.file.originalname,
+//         url: publicUrl,
+//       });
+//     });
+//     blobStream.end(req.file.buffer);
 
 });
 

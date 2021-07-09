@@ -54,10 +54,10 @@ onFileUpload = () => {
     "myFile",
     this.state.selectedFile
   );
-  formData.append(
-    "Name",
-    this.state.selectedFile.name
-  );
+  // formData.append(
+  //   "Name",
+  //   this.state.selectedFile.name
+  // );
   console.log(formData.get("myFile"));
   //console.log(this.state.selectedFile.name);
 
@@ -76,7 +76,8 @@ onFileUpload = () => {
   //console.log(formData.getHeaders());
   axios.post(environment.host + '/discoveryy/doc', {
   formData ,
-   headers: {'content-type':'multipart/form-data'}
+  config
+  // headers: {'content-type':'multipart/form-data'}
 }).then(res => {
     console.log("Document uploaded successfully");
     toast.success('Document Uploaded Successfully')
