@@ -14,6 +14,9 @@ var http = require('http');
 const { timeStamp } = require("console");
 var clientId = "FREE_TRIAL_ACCOUNT";
 var clientSecret = "PUBLIC_SECRET";
+//const Multer = require("./middleware");
+const Multer = require('multer');
+
 //discovery instance setup
 const discovery = new DiscoveryV1({
   version: '2019-04-30',
@@ -25,7 +28,12 @@ disableSslVerification: true
 
 });
 
-
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // no larger than 5mb, you can change as needed.
+  },
+});
 
 // TODO: Specify the URL of your small PDF document (less than 1MB and 10 pages)
 // To extract text from bigger PDf document, you need to use the async method.
@@ -109,15 +117,16 @@ It then assigns the var queryy the statement to send later on with the discovery
 /*function to upload new document to discovery 
 It saves file uploaded in a const named newFile to add to params
 */
-    router.post("/doc", async (req, res) => {
-      const docReceived = req.body
+    router.post("/doc",multer.single('file'), async (req, res) => {
+      var docReceived = req.body
+      console.log(docReceived)
       //const namee= req.body.name
-    const newFile = new File({
+    /*const newFile = new File({
       docReceived
     });
 
 // When you have your own Client ID and secret, put down their values here:
-console.log(newFile);
+console.log(newFile);*/
 var creds = require("../config/keys").YOUR_GOOGLE_JSON_KEY
 const processFile = require("./middleware");
 const { format } = require("util");
@@ -127,40 +136,53 @@ const bucket = storage.bucket("solution_advisor_bucket");
 
 ////
     // Create a new blob in the bucket and upload the file data.
-    const blob = bucket.file(newFile.name);
-    console.log(blob);
+    //const blob = bucket.file('trial upload' + new Date().getTime() +' ');
+    //console.log(blob);
 
-    const blobStream = blob.createWriteStream({
-      resumable: false,
-    });
+    //const blobStream = blob.createWriteStream();
+    const blob = bucket.file('trial upload' + new Date().getTime() +' ');
+    const blobStream = blob.createWriteStream(   {resumable: false,
+      public: true,});
+   
+    //console.log(blob);
+    //console.log("lalalalaala");
+    //console.log(blobStream);
+
     blobStream.on("error", (err) => {
-      res.status(500).send({ message: err.message });
+      console.log(err);
     });
+    blobStream.end();
 
-    blobStream.on("finish", async (data) => {
+    blobStream.on("finish",  () => {
+      console.log("sup")
       // Create URL for directly file access via HTTP.
       const publicUrl = format(
         `https://storage.googleapis.com/${bucket.name}/${blob.name}`
       );
-      try {
+      res.status(200).send(publicUrl);
+      console.log(publicUrl)
+
+      /*try {
         // Make the file public
-        await bucket.file(req.file.originalname).makePublic();
+        await bucket.file(blob.name).makePublic();
       } catch {
         return res.status(500).send({
           message:
-            `Uploaded the file successfully: ${req.file.originalname}, but public access is denied!`,
+            `Uploaded the file successfully: ${blob.name}, but public access is denied!`,
           url: publicUrl,
         });
       }
 
       res.status(200).send({
-        message: "Uploaded the file successfully: " + req.file.originalname,
+        message: "Uploaded the file successfully: " + blob.name,
         url: publicUrl,
       });
     });
-    blobStream.end(req.file.buffer);
+    blobStream.end(req.data);*/
 
 });
+blobStream.end();
+
 
 /*const {Storage} = require('@google-cloud/storage');
 const googleCloudStorage = new Storage({
@@ -266,5 +288,5 @@ request.on('response', function (response) {
 
 
 
-//})
+})
     module.exports = router;

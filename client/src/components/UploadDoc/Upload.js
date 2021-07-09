@@ -5,6 +5,7 @@ import Header from "../header/header";
 import axios  from 'axios';
 import { environment } from "../../Environments/environment";
 import { toast } from "react-toastify";
+import Dropzone from "react-dropzone";
 
 
 class Upload extends React.Component {
@@ -16,7 +17,8 @@ class Upload extends React.Component {
   this.state = {
   solution: "",
   confidence: "",
-  selectedFile:null,
+  selectedFile:"",
+  fileName:"",
   setSelectedFile:[],
   isSelected: false,
   setIsSelected: false
@@ -40,6 +42,24 @@ class Upload extends React.Component {
     toast.success('Document Read')
   })
 }*/
+handleChangePhoto = file => {
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => {
+    this.setState({selectedFile: reader.result});
+    axios.post(environment.host + '/discoveryy/doc', {
+      data: reader.result 
+  }).then(res => {
+    //localStorage.setItem("token", reader.result);
+      console.log("Document uploaded successfully");
+      toast.success('Document Uploaded Successfully')
+    })
+  };
+  reader.onerror = error =>{
+    console.log("Cant upload file",error);
+  };
+  
+  }
 
 onFileChange = event => {
   // Update the state
@@ -54,11 +74,11 @@ onFileUpload = () => {
     "myFile",
     this.state.selectedFile
   );
-  formData.append(
-    "Name",
-    this.state.selectedFile.name
-  );
+  formData.append('method', '_PUT')
   console.log(formData.get("myFile"));
+  console.log(formData.get("myFile").name);
+  var file =this.state.selectedFile
+
   //console.log(this.state.selectedFile.name);
 
   //const name = event.target.files[0].name
@@ -66,18 +86,15 @@ onFileUpload = () => {
   //bodyformData.append("name",name,
   //);
   //bodyformData.append("file", this.state.selectedFile);
-  const config = {
-    headers: {
-      'content-type': 'multipart/form-data'
-    },
-    //body: JSON.stringify(this.state)
-
-  }
+  
   //console.log(formData.getHeaders());
-  axios.post(environment.host + '/discoveryy/doc', {
-  formData ,
-   headers: {'content-type':'multipart/form-data'}
+const headers ={
+    'Content-Type':'multipart/form-data'
+}
+   axios.post(environment.host + '/discoveryy/doc', {
+    data: file 
 }).then(res => {
+  //localStorage.setItem("token", res.data.token);
     console.log("Document uploaded successfully");
     toast.success('Document Uploaded Successfully')
   })
@@ -104,10 +121,7 @@ fileData = () => {
         <h2>File Details:</h2> 
         <p>File Name: {this.state.selectedFile.name}</p> 
         <p>File Type: {this.state.selectedFile.type}</p> 
-        <p> 
-          Last Modified:{" "} 
-          {this.state.selectedFile.lastModifiedDate.toDateString()} 
-        </p> 
+       
       </div> 
     ); 
   } else { 
@@ -121,7 +135,9 @@ fileData = () => {
 }
 //File type: {this.state.selectedFile.type} <br></br>
 //File Size in bytes: {this.state.selectedFile.size}
-
+/*<div>Solution Recommended {this.state.solution} <br></br>
+Confidence Score {this.state.confidence}
+</div>*/
 
    render(){
     return(
@@ -148,12 +164,23 @@ fileData = () => {
       Get Recommendation
       </Button>
              </div>
-             <div>Solution Recommended {this.state.solution} <br></br>
-             Confidence Score {this.state.confidence}
-         </div>
+            
          
       
-        
+         <Dropzone
+                    onDrop={acceptedFiles => acceptedFiles.forEach(a=> this.handleChangePhoto(a))}
+                  >
+                    {({ getRootProps, getInputProps }) => (
+                      <section>
+                        <div {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          <p>
+                          Add file
+                          </p>
+                        </div>
+                      </section>
+                    )}
+                  </Dropzone>
        
 
         </div>
