@@ -16,7 +16,7 @@ class Upload extends React.Component {
   this.state = {
   solution: "",
   confidence: "",
-  selectedFile:[],
+  selectedFile:null,
   setSelectedFile:[],
   isSelected: false,
   setIsSelected: false
@@ -42,37 +42,50 @@ class Upload extends React.Component {
 }*/
 
 onFileChange = event => {
-    
   // Update the state
   this.setState({ selectedFile: event.target.files[0] });
 
 };
 onFileUpload = () => { 
-  // Create an object of formData 
-  const formData = new FormData(); 
-  // Update the formData object 
-  formData.append( 
-    "myFile", 
-    this.state.selectedFile, 
-    this.state.selectedFile.name,
-    this.state.selectedFile.type,
-    this.state.selectedFile.size
-  ); 
+  const formData = new FormData();
+    
+  // Update the formData object
+  formData.append(
+    "myFile",
+    this.state.selectedFile
+  );
+  formData.append(
+    "Name",
+    this.state.selectedFile.name
+  );
+  console.log(formData.get("myFile"));
+  //console.log(this.state.selectedFile.name);
+
+  //const name = event.target.files[0].name
+  //console.log(name)
+  //bodyformData.append("name",name,
+  //);
+  //bodyformData.append("file", this.state.selectedFile);
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data'
+    },
+    //body: JSON.stringify(this.state)
+
+  }
+  //console.log(formData.getHeaders());
   axios.post(environment.host + '/discoveryy/doc', {
-    formData
-  }).then(res => {
+  formData ,
+   headers: {'content-type':'multipart/form-data'}
+}).then(res => {
     console.log("Document uploaded successfully");
     toast.success('Document Uploaded Successfully')
   })
   }
 componentDidMount() {
-  //this.getRecommendation();
-  //this.fileData();
- 
+  this.fileData();
+  //this.onFileChange();
 }
-
-
-
 getRecommendation() {
   axios.get(environment.host + '/discoveryy/rec').then(res => {
     this.setState({ solution: res.data.data.result.results[0].answer });
@@ -82,6 +95,33 @@ getRecommendation() {
        return toast.error("Query failed to send. Please use a different document.");
     
 })}
+
+fileData = () => { 
+  if (this.state.selectedFile) { 
+      
+    return ( 
+      <div> 
+        <h2>File Details:</h2> 
+        <p>File Name: {this.state.selectedFile.name}</p> 
+        <p>File Type: {this.state.selectedFile.type}</p> 
+        <p> 
+          Last Modified:{" "} 
+          {this.state.selectedFile.lastModifiedDate.toDateString()} 
+        </p> 
+      </div> 
+    ); 
+  } else { 
+    return ( 
+      <div> 
+        <br /> 
+        <h4>Choose before Pressing the Upload button</h4> 
+      </div> 
+    ); 
+  } 
+}
+//File type: {this.state.selectedFile.type} <br></br>
+//File Size in bytes: {this.state.selectedFile.size}
+
 
    render(){
     return(
@@ -94,15 +134,14 @@ getRecommendation() {
 <div className="col-8 align-self-center">
        
 <div> 
-                <input type="file" onChange={this.onFileChange} /> 
-                <Button onClick={this.onFileUpload}> 
+                <input type="file" onChange={this.onFileChange.bind(this)} /> 
+                <Button onClick={this.onFileUpload.bind(this)}> 
                   Upload File 
                 </Button> 
             </div> 
           Additional Information <br></br>
-   File type: {this.state.selectedFile.type} <br></br>
-  File Size in bytes: {this.state.selectedFile.size}
-
+          {this.fileData()} 
+  
 
                  <div>
                  <Button onClick={this.getRecommendation.bind(this)}>

@@ -12,6 +12,7 @@
     "babel-jest": "^26.6.3",
     "bootstrap": "^4.6.0",
     "dotenv": "^8.2.0",
+    "form-data": "^4.0.0",
     "ibm-platform-services": "^0.18.12",
     "ibm-watson": "^6.1.1",
     "prop-types": "^15.7.2",
