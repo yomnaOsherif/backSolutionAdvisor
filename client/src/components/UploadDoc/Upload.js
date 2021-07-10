@@ -27,65 +27,27 @@ class Upload extends React.Component {
 
  
 
-/*onFileRead = () =>{
-  const formData = new FormData(); 
-  // Update the formData object 
-  formData.append( 
-    "myFile", 
-    this.state.selectedFile
-  ); 
-  axios.post(environment.host + '/discoveryy/update', {
-    formData
-  }).then(res => {
-    toast.success('Document Read')
-  })
-}*/
+
 
 onFileChange = event => {
-  // Update the state
   this.setState({ selectedFile: event.target.files[0] });
 
-};
-onFileUpload = () => { 
-  const formData = new FormData();
-    
-  // Update the formData object
-  formData.append(
-    "myFile",
-    this.state.selectedFile
-  );
-  // formData.append(
-  //   "Name",
-  //   this.state.selectedFile.name
-  // );
-  console.log(formData.get("myFile"));
-  //console.log(this.state.selectedFile.name);
+}
 
-  //const name = event.target.files[0].name
-  //console.log(name)
-  //bodyformData.append("name",name,
-  //);
-  //bodyformData.append("file", this.state.selectedFile);
-  const config = {
-    headers: {
-      'content-type': 'multipart/form-data'
-    },
-    //body: JSON.stringify(this.state)
+onFileUpload = (event) => { 
+  
+  event.preventDefault();
+  let formData = new FormData();
+  formData.append("myFile", this.state.selectedFile, this.state.selectedFile.name);
 
-  }
-  //console.log(formData.getHeaders());
-  axios.post(environment.host + '/discoveryy/doc', {
-  formData ,
-  config
-  // headers: {'content-type':'multipart/form-data'}
-}).then(res => {
-    console.log("Document uploaded successfully");
+  fetch(environment.host + '/upload', {method: "POST", body: formData})
+  .then(res => {
     toast.success('Document Uploaded Successfully')
-  })
-  }
+  });
+ }
 componentDidMount() {
+  console.log(this.state.selectedFile);
   this.fileData();
-  //this.onFileChange();
 }
 getRecommendation() {
   axios.get(environment.host + '/discoveryy/rec').then(res => {
@@ -123,48 +85,26 @@ fileData = () => {
 //File type: {this.state.selectedFile.type} <br></br>
 //File Size in bytes: {this.state.selectedFile.size}
 
-
-   render(){
+  render(){
     return(
-        
-        
-<div className="row">
-<div className="col-4">
-<Header/>
-</div>
-<div className="col-8 align-self-center">
-       
-<div> 
-                <input type="file" onChange={this.onFileChange.bind(this)} /> 
-                <Button onClick={this.onFileUpload.bind(this)}> 
-                  Upload File 
-                </Button> 
-            </div> 
-          Additional Information <br></br>
-          {this.fileData()} 
-  
-
-                 <div>
-                 <Button onClick={this.getRecommendation.bind(this)}>
-      Get Recommendation
-      </Button>
-             </div>
-             <div>Solution Recommended {this.state.solution} <br></br>
-             Confidence Score {this.state.confidence}
-         </div>
-         
-      
-        
-       
-
+    <div className="row">
+      <div className="col-4">
+        <Header/>
+      </div>
+      <div className="col-8 align-self-center">
+        <div> 
+          <input type="file" onChange={this.onFileChange.bind(this)} /> 
+          <Button onClick={this.onFileUpload.bind(this)}>Upload File</Button> 
         </div>
-
-             </div>
-           
-
-
-         )
-
-                 }
-                }
+          Additional Information <br></br>
+          {this.fileData()}
+        <div>
+          <Button onClick={this.getRecommendation.bind(this)}>Get Recommendation</Button>
+        </div>
+        <div>Solution Recommended {this.state.solution} <br></br>
+          Confidence Score {this.state.confidence}
+      </div>
+      </div>
+    </div>
+  )}}
 export default Upload;
