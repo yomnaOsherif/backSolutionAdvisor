@@ -19,7 +19,8 @@ class Upload extends React.Component {
   selectedFile:null,
   setSelectedFile:[],
   isSelected: false,
-  setIsSelected: false
+  setIsSelected: false,
+  uploadedFileUrl: "",
 
  };
 
@@ -40,8 +41,13 @@ onFileUpload = (event) => {
   let formData = new FormData();
   formData.append("myFile", this.state.selectedFile, this.state.selectedFile.name);
 
+
+  //path: "uploads/1625914875101.pdf"
   fetch(environment.host + '/upload', {method: "POST", body: formData})
-  .then(res => {
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    this.setState({ uploadedFileUrl: data.path });
     toast.success('Document Uploaded Successfully')
   });
  }
@@ -49,15 +55,23 @@ componentDidMount() {
   console.log(this.state.selectedFile);
   this.fileData();
 }
+
 getRecommendation() {
-  axios.get(environment.host + '/discoveryy/rec').then(res => {
+  const recommendationEndpoint  = environment.host + '/recommendation'
+  axios.get(recommendationEndpoint, 
+    {
+      params: {
+        url: this.state.uploadedFileUrl
+      }
+    })
+  .then(res => {
     this.setState({ solution: res.data.data.result.results[0].answer });
-// , confidence: res.data.data.result.results[0].result_metadata.confidence
+    //confidence: res.data.data.result.results[0].result_metadata.confidence
   }).catch(err => {
     if (err.message) 
-       return toast.error("Query failed to send. Please use a different document.");
-    
-})}
+    return toast.error("Query failed to send. Please use a different document.");
+  })
+}
 
 fileData = () => { 
   if (this.state.selectedFile) { 

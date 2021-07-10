@@ -1,10 +1,12 @@
-const express = require("express");
+const express = require("express")
+const pdfUtil = require('pdf-to-text');
+const DiscoveryService = require("../service/discovery");
+const {discovery, queryConfig} = require("../config/discovery");
+
 const router = express.Router();
-const DiscoveryV1 = require('ibm-watson/discovery/v1');
-const { IamAuthenticator } = require('ibm-watson/auth');
+const discoveryService= new DiscoveryService(discovery, queryConfig, pdfUtil);
 
-
-
-router.get("/", (req, res));
-
-module.exports = router;
+module.exports = app => {
+    app.use("/api/recommendation", router);
+    router.get("/", discoveryService.recommend.bind(discoveryService));
+}
