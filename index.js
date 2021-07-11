@@ -1,8 +1,9 @@
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
+require('dotenv').config({ path: './config.env'});
 const cors = require('cors');
-const db = require("./config/keys").mongoURI;
+const  db = process.env.MONGO_URI || require("./config/keys").mongoURI;
 const route = require("./pages");
 
 app.use(express.json());

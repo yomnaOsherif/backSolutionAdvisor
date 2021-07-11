@@ -892,6 +892,7 @@
     "anymatch" "^2.0.0"
     "async-each" "^1.0.1"
     "braces" "^2.3.2"
+    "fsevents" "^1.2.7"
     "glob-parent" "^3.1.0"
     "inherits" "^2.0.3"
     "is-binary-path" "^1.0.0"
@@ -2537,6 +2538,7 @@
     "denque" "^1.4.1"
     "require_optional" "^1.0.1"
     "safe-buffer" "^5.1.2"
+    "saslprep" "^1.0.0"
   optionalDependencies:
     "saslprep" "^1.0.0"
 
@@ -3164,6 +3166,8 @@
   "integrity" "sha1-9QopZecUTpr9mYmC8V33BnMPVqk="
   "resolved" "https://registry.npmjs.org/rimraf/-/rimraf-2.0.3.tgz"
   "version" "2.0.3"
+  dependencies:
+    "graceful-fs" "~1.1"
   optionalDependencies:
     "graceful-fs" "~1.1"
 
