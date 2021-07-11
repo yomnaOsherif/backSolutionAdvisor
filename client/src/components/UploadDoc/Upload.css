@@ -1,0 +1,33 @@
+.title-upload{
+    font-family: Montserrat;
+    font-size: 36px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    height: 5vh;
+    column-gap: 25px;
+    font-weight: bold;
+
+    }
+.subtitle-upload{
+    font-size: 17px;
+line-height: 35px;
+/* identical to box height, or 165% */
+align-items: center;
+    color: #778192;
+}
+
+.recommendation-area{
+    text-align: center;
+    line-height: 27px;
+
+}
+.bt-upload{
+    border-color: #e7e7e7;
+    color: black;
+}
+
+.bt-upload:hover {
+    background: #e7e7e7;
+  }

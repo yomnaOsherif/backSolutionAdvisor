@@ -5,6 +5,8 @@ import Header from "../header/header";
 import axios  from 'axios';
 import { environment } from "../../Environments/environment";
 import { toast } from "react-toastify";
+import "./Upload.css";
+import LOGO from "../../assets/logo.png";
 
 
 class Upload extends React.Component {
@@ -78,20 +80,14 @@ fileData = () => {
       
     return ( 
       <div> 
-        <h2>File Details:</h2> 
+        <br></br>
+        <h5>File Details:</h5> 
         <p>File Name: {this.state.selectedFile.name}</p> 
         <p>File Type: {this.state.selectedFile.type}</p> 
         <p> 
           Last Modified:{" "} 
           {this.state.selectedFile.lastModifiedDate.toDateString()} 
         </p> 
-      </div> 
-    ); 
-  } else { 
-    return ( 
-      <div> 
-        <br /> 
-        <h4>Choose before Pressing the Upload button</h4> 
       </div> 
     ); 
   } 
@@ -101,24 +97,38 @@ fileData = () => {
 
   render(){
     return(
-    <div className="row">
-      <div className="col-4">
+      <div className='row success-container'>
+            <div className='col-3 header-container'>
         <Header/>
       </div>
-      <div className="col-8 align-self-center">
+      <div className='col-8 the-rest'>
+      <div className="logo-aboutUs" >
+            <img src={LOGO}  width="110px" alt="ibm"/>
+      </div> 
         <div> 
-          <input type="file" onChange={this.onFileChange.bind(this)} /> 
+          <div className="title-upload"> Upload Documents</div>
+          <br></br>
+          <div className="subtitle-upload">Browse  your documents to  give you  recommandations for IBM Solution.
+         <br></br>
+         Supported file types: PDF 
+         <p> For the best performance, limit the number of words in each document. Fewer than 2,000 words  is good, but closer to 1,000 words is better.</p>
+         </div >
+         <br></br>
+         <div className='recommendation-area'>
+          < input type="file" onChange={this.onFileChange.bind(this)} /> 
           <Button onClick={this.onFileUpload.bind(this)}>Upload File</Button> 
-        </div>
-          Additional Information <br></br>
           {this.fileData()}
-        <div>
+          <br></br>
+          <br></br>
+
           <Button onClick={this.getRecommendation.bind(this)}>Get Recommendation</Button>
-        </div>
         <div>Solution Recommended {this.state.solution} <br></br>
           Confidence Score {this.state.confidence}
       </div>
       </div>
+      </div>
+      </div>
     </div>
+
   )}}
 export default Upload;
