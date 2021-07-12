@@ -20,7 +20,10 @@ import tut from "../../assets/tut.png";
 import "./header.css";
 
 function HeaderPage() {
+const onupdate =() =>{
 
+   history.push(links.UPDATE);
+};
   const onLogout = () => {
    localStorage.clear();
    history.push(links.LOGIN);
@@ -106,7 +109,7 @@ function HeaderPage() {
       </Button>
       <div className="list-group-container">
         <ul className="list-group">
-          <li className="header-start-listitem">
+          <li className="header-start-listitem" onClick={onupdate}>
             <div className="header-icon-container">
               <img
                 src={Profile}
