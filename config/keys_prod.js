@@ -12,5 +12,8 @@ module.exports = {
     "client_x509_cert_url": process.env.Client_x509_cert_url
   },  
     mongoURI: process.env.MONGO_URI,
-    secretOrKey: process.env.SECRET
+    secretOrKey: process.env.SECRET,
+    API_KEY: process.env.API_KEY,
+    ENVIRONMENT_ID: process.env.ENVIRONMENT_ID,
+    COLLECTION_ID: process.env.COLLECTION_ID
   }

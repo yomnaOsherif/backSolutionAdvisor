@@ -1,6 +1,6 @@
 /node_modules
 /uploads
 /config.env
-
+/config/keys_dev
 
 sudo nano ~/.bashrc

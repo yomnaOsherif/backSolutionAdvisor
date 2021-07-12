@@ -13,5 +13,8 @@ module.exports = {
   },  
     mongoURI:
       "mongodb+srv://yomnasherif:secretpassword@cluster0.lrgtr.mongodb.net/SolutionAdvisor?retryWrites=true&w=majority",
-    secretOrKey: 'verysecretkey'
+    secretOrKey: 'verysecretkey',
+    API_KEY: 'zxIfLbDWvLj6bGTg7v7wr4pJ1RGpJlfyge4T-mSLdTRq',
+    ENVIRONMENT_ID: 'e6d028cf-884a-4004-9131-7bae292ed0d9',
+    COLLECTION_ID: 'd2c0c8dc-4941-4667-855c-7f28f0baaf56'
   }
