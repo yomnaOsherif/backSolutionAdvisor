@@ -1,7 +1,16 @@
 ---
 applications:
-  - name: solution-advisor-yomna
-    memory: 64M
+  - name: solution-advisor
+    memory: 128M
     buildpacks: 
       - https://github.com/cloudfoundry/nodejs-buildpack
     command: npm start
+    services:
+      docker:
+       build:
+        context: .
+        dockerfile: ./Dockerfile
+       environment:
+        NODE_ENV: production
+        ports:
+          - 5000:5000
