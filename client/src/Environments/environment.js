@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    host: "http://localhost:5000/api"
+    host: "https://solution-advisor.eu-gb.mybluemix.net/:5000/api"
   };
