@@ -5,11 +5,8 @@ applications:
     buildpacks: 
       - https://github.com/cloudfoundry/nodejs-buildpack
     command: npm start
-      docker:
-       build:
-        context: .
-        dockerfile: ./Dockerfile
-       environment:
-        NODE_ENV: production
-        ports:
-          - 5000:5000
+    dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+      ports:
+        - 5000:5000
