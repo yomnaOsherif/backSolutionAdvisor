@@ -5,7 +5,6 @@ applications:
     buildpacks: 
       - https://github.com/cloudfoundry/nodejs-buildpack
     command: npm start
-    services:
       docker:
        build:
         context: .
