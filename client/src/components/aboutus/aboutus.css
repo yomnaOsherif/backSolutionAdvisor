@@ -36,6 +36,8 @@
     line-height: 22px;
     display: flex;
     align-items: center;
-    color: #778192;
+    color: #676f7c;
+    flex-direction: column;
+    text-align: justify;
 }
 
