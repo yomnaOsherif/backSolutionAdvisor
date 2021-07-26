@@ -111,7 +111,7 @@ function HeaderPage() {
       </Button>
       <div className="list-group-container">
         <ul className="list-group">
-          <li className="header-start-listitem">
+          {/* <li className="header-start-listitem">
             <div className="header-icon-container">
               <img
                 src={Profile}
@@ -131,7 +131,7 @@ function HeaderPage() {
                 <p>My Profile</p>
               </div>
             </div>
-          </li>
+          </li> */}
 
           <li className="header-start-listitem" onClick={onAboutUs}>
             <div className="header-icon-container">
