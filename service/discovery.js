@@ -8,25 +8,6 @@ class DiscoveryService
         this.pdfToTextExtractor =  pdfToTextExtractor;
     }
 
-    async query(req, res) {
-        const {queryParams} = req.body;
-        queryParams = queryParams ||  {
-            environmentId: 'e6d028cf-884a-4004-9131-7bae292ed0d9',
-            collectionId: 'd2c0c8dc-4941-4667-855c-7f28f0baaf56',
-            query:'question:"enormously complex web of integrations"|question:"Information was siloed"|question:"(CI/CD) pipeline"',
-            type: "term",
-            field: "answer",
-            count: 1,
-            
-          }; 
-        this.discovery.query(queryParams)
-        .then(queryResponse => {
-          console.log(JSON.stringify(queryResponse, null,2));
-        })
-        .catch(err => {
-          console.log('error:', err);
-        });
-    }
     
     async recommend(req, res){
         try{
@@ -107,33 +88,3 @@ class DiscoveryService
     }
 }
 module.exports = DiscoveryService;
-/* 
-const express = require("express");
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
-const router = express.Router();
-const DiscoveryV1 = require('ibm-watson/discovery/v1');
-const { IamAuthenticator } = require('ibm-watson/auth');
-const File = require("../models/Docs");
-const pdfUtil = require('pdf-to-text');
-const pdf_path = "/Users/yomnasherif/Desktop/OCRTRIAL-1.pdf"
-const pdf_path2 = "/Users/yomnasherif/Desktop/ABC Company.pdf"
-const pdf_path3 = "/Users/yomnasherif/Desktop/XYZ Company.pdf"
-const pdf_url="https://cdn.bytescout.com/source-code-samples/PDF-co-Web-API-JavaScript-Convert-PDF-To-Text-From-URL-(Node-js).pdf"
-var queryy = ""
-var exportedData = ""
-var http = require('http');
-const { timeStamp } = require("console");
-var clientId = "FREE_TRIAL_ACCOUNT";
-var clientSecret = "PUBLIC_SECRET";
-//discovery instance setup
-const discovery = new DiscoveryV1({
-  version: '2019-04-30',
-  authenticator: new IamAuthenticator({
-    apikey: 'zxIfLbDWvLj6bGTg7v7wr4pJ1RGpJlfyge4T-mSLdTRq',
-  }),
-serviceUrl: 'https://api.eu-de.discovery.watson.cloud.ibm.com/instances/f014925c-f2b8-4b02-ab32-3efcc1cd427d',
-disableSslVerification: true
-
-});
- */
